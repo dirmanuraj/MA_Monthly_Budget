@@ -25,9 +25,7 @@
   <!-- Login gate -->
   <div id="loginScreen" class="login-screen hidden">
     <div class="glass login-card">
-      <div class="login-logo">
-        <svg viewBox="0 0 100 100"><defs><linearGradient id="gLogin" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#6366f1"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs><g fill="none" stroke="url(#gLogin)" stroke-width="9" stroke-linejoin="round" stroke-linecap="round"><path d="M12,80 L12,24 L50,64 L88,24 L88,80"/><path d="M30,80 L50,38 L70,80" stroke-width="8"/></g></svg>
-      </div>
+      <div class="login-logo"><svg viewBox="0 0 100 100"><defs><linearGradient id="gLogin" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#6366f1"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs><g fill="none" stroke="url(#gLogin)" stroke-width="9" stroke-linejoin="round" stroke-linecap="round"><path d="M12,80 L12,24 L50,64 L88,24 L88,80"/><path d="M30,80 L50,38 L70,80" stroke-width="8"/></g></svg></div>
       <h1>AisMan Expense Tracker</h1>
       <p>Enter your password to continue</p>
       <input type="password" id="loginPassword" placeholder="Password" />
@@ -36,13 +34,23 @@
     </div>
   </div>
 
+  <!-- PIN gate (device-local) -->
+  <div id="pinScreen" class="login-screen hidden">
+    <div class="glass login-card">
+      <div class="login-logo"><svg viewBox="0 0 100 100"><defs><linearGradient id="gPin" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#6366f1"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs><g fill="none" stroke="url(#gPin)" stroke-width="9" stroke-linejoin="round" stroke-linecap="round"><path d="M12,80 L12,24 L50,64 L88,24 L88,80"/><path d="M30,80 L50,38 L70,80" stroke-width="8"/></g></svg></div>
+      <h1>Enter PIN</h1>
+      <p>This device is locked</p>
+      <input type="password" inputmode="numeric" id="pinInput" placeholder="••••" maxlength="8" />
+      <button id="pinBtn" class="btn-primary">Unlock</button>
+      <div id="pinError" class="login-error"></div>
+    </div>
+  </div>
+
   <!-- App -->
   <div id="app" class="app hidden">
     <header class="glass topbar">
       <div class="brand">
-        <span class="brand-mark">
-          <svg class="ma-mark" viewBox="0 0 100 100"><defs><linearGradient id="gBrand" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#6366f1"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs><g fill="none" stroke="url(#gBrand)" stroke-width="9" stroke-linejoin="round" stroke-linecap="round"><path d="M12,80 L12,24 L50,64 L88,24 L88,80"/><path d="M30,80 L50,38 L70,80" stroke-width="8"/></g></svg>
-        </span>
+        <span class="brand-mark"><svg class="ma-mark" viewBox="0 0 100 100"><defs><linearGradient id="gBrand" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#6366f1"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs><g fill="none" stroke="url(#gBrand)" stroke-width="9" stroke-linejoin="round" stroke-linecap="round"><path d="M12,80 L12,24 L50,64 L88,24 L88,80"/><path d="M30,80 L50,38 L70,80" stroke-width="8"/></g></svg></span>
         <div>
           <h1><span class="t-ais">Ais</span><span class="t-man">Man</span> <span class="t-rest">Expense Tracker</span></h1>
           <span class="brand-sub" id="persistenceLabel"></span>
@@ -61,6 +69,8 @@
     <main class="container">
       <section class="cards" id="summaryCards"></section>
       <section class="glass savings-strip" id="savingsStrip"></section>
+      <section id="paceStrip" class="glass pace-strip hidden"></section>
+      <section id="alertBanner" class="alert-banner hidden"></section>
 
       <!-- Transactions -->
       <section class="glass panel">
@@ -68,12 +78,23 @@
           <h2>Transactions <span id="txnCount" class="muted"></span></h2>
           <button id="addTxnBtn" class="btn-primary">+ Add transaction</button>
         </div>
+        <div class="chip-row" id="presetChips"></div>
+        <div class="action-row">
+          <button id="applyRecurringBtn" class="btn-ghost btn-sm">↻ Apply recurring</button>
+          <button id="dupMonthBtn" class="btn-ghost btn-sm">⧉ Duplicate last month</button>
+          <button id="csvBtn" class="btn-ghost btn-sm">⤒ Import CSV</button>
+          <input type="file" id="csvInput" accept=".csv,text/csv" class="hidden" />
+        </div>
+        <div class="filter-row">
+          <input type="text" id="searchInput" class="glass-input" placeholder="Search remarks or category…" />
+          <select id="filterCat" class="glass-input"></select>
+        </div>
         <div class="table-wrap">
           <table class="txn-table">
             <thead><tr><th>Date</th><th>Category</th><th class="num">Amount</th><th>Remarks</th><th></th></tr></thead>
             <tbody id="txnBody"></tbody>
           </table>
-          <div id="emptyState" class="empty-state hidden">No transactions yet for this month. Add your first one above.</div>
+          <div id="emptyState" class="empty-state hidden">No transactions match. Add one above or clear the filter.</div>
         </div>
       </section>
 
@@ -87,6 +108,7 @@
           <input type="text" id="newItem" class="glass-input" autocomplete="off" placeholder="Add an item that ran out… e.g. milk, rice, oil" />
           <button id="addItemBtn" class="btn-primary">Add</button>
         </div>
+        <div class="chip-row" id="stapleChips"></div>
         <ul id="shopList" class="shop-list"></ul>
         <div id="listEmpty" class="empty-state hidden">Kitchen's stocked! Nothing on the buy list.</div>
       </section>
@@ -103,9 +125,15 @@
         </div>
       </section>
 
+      <!-- Year at a glance -->
+      <section class="glass panel">
+        <div class="panel-head"><h2>Year at a Glance <span id="yearLabel" class="muted"></span></h2></div>
+        <div class="chart-wrap chart-wrap-tall"><canvas id="yearChart"></canvas></div>
+      </section>
+
       <!-- Category breakdown -->
       <section class="glass panel">
-        <div class="panel-head"><h2>Category Breakdown</h2></div>
+        <div class="panel-head"><h2>Category Breakdown <span class="muted">vs last month</span></h2></div>
         <div id="categoryBars" class="category-bars"></div>
       </section>
     </main>
@@ -129,17 +157,63 @@
   <!-- Settings slide-over -->
   <div id="settingsOverlay" class="settings-overlay hidden">
     <div class="glass settings-panel">
-      <div class="settings-head"><h3>Settings — Budgets &amp; Categories</h3><button id="closeSettings" class="icon-toggle">✕</button></div>
+      <div class="settings-head"><h3>Settings</h3><button id="closeSettings" class="icon-toggle">✕</button></div>
+
+      <h4 class="settings-sub">Budgets &amp; categories</h4>
       <p class="muted" id="settingsMonthLabel"></p>
       <div id="budgetRows" class="budget-rows"></div>
       <div class="add-cat-row">
-        <input type="text" id="newCatName" class="glass-input" placeholder="New category name" />
+        <input type="text" id="newCatName" class="glass-input" placeholder="New category" />
         <input type="number" id="newCatBudget" class="glass-input" placeholder="Budget" min="0" />
         <button id="addCatBtn" class="btn-ghost">+ Add</button>
       </div>
       <div class="settings-total"><span>Total monthly budget</span><b id="settingsTotal">₹0</b></div>
       <label class="apply-all"><input type="checkbox" id="applyAll" /> Apply these budgets to every month</label>
-      <div class="modal-actions"><button id="settingsSaveBtn" class="btn-primary">Save changes</button></div>
+      <div class="modal-actions"><button id="settingsSaveBtn" class="btn-primary">Save budgets</button></div>
+
+      <h4 class="settings-sub">Quick-add presets</h4>
+      <div id="presetRows" class="manage-rows"></div>
+      <div class="add-cat-row">
+        <input type="text" id="newPresetLabel" class="glass-input" placeholder="Label" />
+        <select id="newPresetCat" class="glass-input"></select>
+      </div>
+      <div class="add-cat-row">
+        <input type="text" id="newPresetRemarks" class="glass-input" placeholder="Remarks (optional)" />
+        <button id="addPresetBtn" class="btn-ghost">+ Add</button>
+      </div>
+
+      <h4 class="settings-sub">Recurring transactions</h4>
+      <div id="recurringRows" class="manage-rows"></div>
+      <div class="add-cat-row">
+        <select id="newRecCat" class="glass-input"></select>
+        <input type="number" id="newRecAmount" class="glass-input" placeholder="Amount" min="0" />
+      </div>
+      <div class="add-cat-row">
+        <input type="text" id="newRecRemarks" class="glass-input" placeholder="Remarks" />
+        <input type="number" id="newRecDay" class="glass-input" placeholder="Day" min="1" max="31" />
+        <button id="addRecBtn" class="btn-ghost">+ Add</button>
+      </div>
+
+      <h4 class="settings-sub">Grocery staples</h4>
+      <div class="chip-row" id="stapleManage"></div>
+      <div class="add-cat-row">
+        <input type="text" id="newStaple" class="glass-input" placeholder="New staple" />
+        <button id="addStapleBtn" class="btn-ghost">+ Add</button>
+      </div>
+
+      <h4 class="settings-sub">Security</h4>
+      <p class="muted" id="pinStatus"></p>
+      <div class="action-row">
+        <button id="setPinBtn" class="btn-ghost btn-sm">Set / change PIN</button>
+        <button id="removePinBtn" class="btn-ghost btn-sm">Remove PIN</button>
+      </div>
+
+      <h4 class="settings-sub">Backup &amp; data</h4>
+      <div class="action-row">
+        <button id="backupBtn" class="btn-ghost btn-sm">⤓ Download backup</button>
+        <button id="restoreBtn" class="btn-ghost btn-sm">⤒ Restore backup</button>
+        <input type="file" id="restoreInput" accept=".json,application/json" class="hidden" />
+      </div>
     </div>
   </div>
 

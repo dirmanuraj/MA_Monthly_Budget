@@ -30,5 +30,84 @@
       },
       "transactions": []
     }
-  }
+  },
+  "presets": [
+    {
+      "id": "p1",
+      "label": "Swiggy",
+      "category": "Online Food Ordering",
+      "remarks": "swiggy"
+    },
+    {
+      "id": "p2",
+      "label": "Instamart",
+      "category": "Groceries",
+      "remarks": "instamart"
+    },
+    {
+      "id": "p3",
+      "label": "Blinkit",
+      "category": "Groceries",
+      "remarks": "blinkit"
+    },
+    {
+      "id": "p4",
+      "label": "Food truck",
+      "category": "Online Food Ordering",
+      "remarks": "food truck"
+    },
+    {
+      "id": "p5",
+      "label": "Parking",
+      "category": "Leisure & Entertainment",
+      "remarks": "parking"
+    }
+  ],
+  "recurring": [
+    {
+      "id": "r1",
+      "category": "Rent & Maintenance",
+      "amount": 19070,
+      "remarks": "Rent",
+      "day": 1
+    },
+    {
+      "id": "r2",
+      "category": "Bills & Subscriptions",
+      "amount": 1178,
+      "remarks": "Internet / wifi",
+      "day": 17
+    },
+    {
+      "id": "r3",
+      "category": "Bills & Subscriptions",
+      "amount": 749,
+      "remarks": "iCloud storage",
+      "day": 12
+    },
+    {
+      "id": "r4",
+      "category": "Bills & Subscriptions",
+      "amount": 365,
+      "remarks": "Apple One",
+      "day": 12
+    },
+    {
+      "id": "r5",
+      "category": "Bills & Subscriptions",
+      "amount": 750,
+      "remarks": "Google storage",
+      "day": 13
+    }
+  ],
+  "staples": [
+    "Milk",
+    "Rice",
+    "Cooking oil",
+    "Eggs",
+    "Onions",
+    "Tomatoes",
+    "Bread",
+    "Chicken"
+  ]
 }
