@@ -5,13 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
   <title>AisMan Expense Tracker</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  <link rel="apple-touch-icon" href="favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <link rel="manifest" href="manifest.webmanifest" />
   <meta name="theme-color" content="#000000" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="apple-mobile-web-app-title" content="AisMan" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -20,7 +25,9 @@
   <!-- Login gate -->
   <div id="loginScreen" class="login-screen hidden">
     <div class="glass login-card">
-      <div class="login-logo">MA</div>
+      <div class="login-logo">
+        <svg viewBox="0 0 100 100"><defs><linearGradient id="gLogin" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#6366f1"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs><g fill="none" stroke="url(#gLogin)" stroke-width="9" stroke-linejoin="round" stroke-linecap="round"><path d="M12,80 L12,24 L50,64 L88,24 L88,80"/><path d="M30,80 L50,38 L70,80" stroke-width="8"/></g></svg>
+      </div>
       <h1>AisMan Expense Tracker</h1>
       <p>Enter your password to continue</p>
       <input type="password" id="loginPassword" placeholder="Password" />
@@ -33,16 +40,18 @@
   <div id="app" class="app hidden">
     <header class="glass topbar">
       <div class="brand">
-        <span class="brand-mark">MA</span>
+        <span class="brand-mark">
+          <svg class="ma-mark" viewBox="0 0 100 100"><defs><linearGradient id="gBrand" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#6366f1"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs><g fill="none" stroke="url(#gBrand)" stroke-width="9" stroke-linejoin="round" stroke-linecap="round"><path d="M12,80 L12,24 L50,64 L88,24 L88,80"/><path d="M30,80 L50,38 L70,80" stroke-width="8"/></g></svg>
+        </span>
         <div>
-          <h1>AisMan Expense Tracker</h1>
+          <h1><span class="t-ais">Ais</span><span class="t-man">Man</span> <span class="t-rest">Expense Tracker</span></h1>
           <span class="brand-sub" id="persistenceLabel"></span>
         </div>
       </div>
       <div class="topbar-right">
         <select id="monthSelect" class="glass-input"></select>
         <select id="yearSelect" class="glass-input"></select>
-        <button id="exportBtn" class="icon-toggle" title="Download Excel">⤓</button>
+        <button id="exportBtn" class="icon-toggle" title="Download PDF report">⤓</button>
         <button id="themeToggle" class="icon-toggle" title="Toggle theme">🌙</button>
         <button id="settingsBtn" class="icon-toggle" title="Settings">⚙︎</button>
         <span id="saveStatus" class="save-status">Saved</span>
@@ -50,13 +59,10 @@
     </header>
 
     <main class="container">
-      <!-- Summary cards = main overview -->
       <section class="cards" id="summaryCards"></section>
-
-      <!-- Savings highlight -->
       <section class="glass savings-strip" id="savingsStrip"></section>
 
-      <!-- Transactions (right under the overview) -->
+      <!-- Transactions -->
       <section class="glass panel">
         <div class="panel-head transactions-head">
           <h2>Transactions <span id="txnCount" class="muted"></span></h2>
@@ -64,23 +70,21 @@
         </div>
         <div class="table-wrap">
           <table class="txn-table">
-            <thead>
-              <tr><th>Date</th><th>Category</th><th class="num">Amount</th><th>Remarks</th><th></th></tr>
-            </thead>
+            <thead><tr><th>Date</th><th>Category</th><th class="num">Amount</th><th>Remarks</th><th></th></tr></thead>
             <tbody id="txnBody"></tbody>
           </table>
           <div id="emptyState" class="empty-state hidden">No transactions yet for this month. Add your first one above.</div>
         </div>
       </section>
 
-      <!-- Grocery shopping / to-do list -->
+      <!-- Grocery buy list -->
       <section class="glass panel">
         <div class="panel-head transactions-head">
           <h2>🛒 Grocery Buy List <span id="listCount" class="muted"></span></h2>
           <button id="clearListBtn" class="btn-ghost">Clear list</button>
         </div>
         <div class="list-add">
-          <input type="text" id="newItem" class="glass-input" placeholder="Add an item that ran out… e.g. milk, rice, oil" />
+          <input type="text" id="newItem" class="glass-input" autocomplete="off" placeholder="Add an item that ran out… e.g. milk, rice, oil" />
           <button id="addItemBtn" class="btn-primary">Add</button>
         </div>
         <ul id="shopList" class="shop-list"></ul>
@@ -94,8 +98,8 @@
           <div class="chart-wrap"><canvas id="barChart"></canvas></div>
         </div>
         <div class="glass panel">
-          <div class="panel-head"><h2>Spending Split</h2></div>
-          <div class="chart-wrap"><canvas id="donutChart"></canvas></div>
+          <div class="panel-head"><h2>Activity Rings <span class="muted">spent vs budget</span></h2></div>
+          <div id="ringBox" class="ring-box"></div>
         </div>
       </section>
 
@@ -125,10 +129,7 @@
   <!-- Settings slide-over -->
   <div id="settingsOverlay" class="settings-overlay hidden">
     <div class="glass settings-panel">
-      <div class="settings-head">
-        <h3>Settings — Budgets &amp; Categories</h3>
-        <button id="closeSettings" class="icon-toggle">✕</button>
-      </div>
+      <div class="settings-head"><h3>Settings — Budgets &amp; Categories</h3><button id="closeSettings" class="icon-toggle">✕</button></div>
       <p class="muted" id="settingsMonthLabel"></p>
       <div id="budgetRows" class="budget-rows"></div>
       <div class="add-cat-row">
