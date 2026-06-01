@@ -62,6 +62,7 @@ async function loadApp() {
   if (!res.ok) { toast("Could not load data", true); return; }
   DATA = await res.json();
   if (!DATA.defaultBudgets) DATA.defaultBudgets = {};
+  if (!Array.isArray(DATA.shoppingList)) DATA.shoppingList = [];
   $("app").classList.remove("hidden");
 
   // pick latest existing month, else today
@@ -76,6 +77,10 @@ async function loadApp() {
   $("closeSettings").onclick = () => $("settingsOverlay").classList.add("hidden");
   $("addCatBtn").onclick = addCategoryRow;
   $("settingsSaveBtn").onclick = saveSettings;
+  $("exportBtn").onclick = exportExcel;
+  $("addItemBtn").onclick = addShopItem;
+  $("newItem").onkeydown = (e) => e.key === "Enter" && addShopItem();
+  $("clearListBtn").onclick = clearShopList;
   ensureMonth(currentMonth);
   render();
 }
@@ -154,6 +159,7 @@ function render() {
 
   renderCategoryBars(m, byCat);
   renderTable(m);
+  renderShopList();
   renderCharts(m, byCat);
 }
 
@@ -304,6 +310,72 @@ async function saveSettings() {
   toast("Budgets updated");
 }
 
+// ---------- Grocery buy list ----------
+function renderShopList() {
+  const list = DATA.shoppingList || [];
+  $("listCount").textContent = list.length ? `(${list.filter(i=>!i.done).length} to buy)` : "";
+  $("listEmpty").classList.toggle("hidden", list.length > 0);
+  $("shopList").innerHTML = list.map((it) => `
+    <li class="shop-item ${it.done ? "done" : ""}">
+      <input type="checkbox" ${it.done ? "checked" : ""} onchange="toggleItem('${it.id}')" />
+      <span class="item-text">${esc(it.text)}</span>
+      <button class="icon-btn del" onclick="deleteItem('${it.id}')">✕</button>
+    </li>`).join("");
+}
+async function addShopItem() {
+  const input = $("newItem"); const text = input.value.trim();
+  if (!text) return;
+  DATA.shoppingList.push({ id: "s" + Date.now().toString(36), text, done: false });
+  input.value = ""; renderShopList(); await persist();
+}
+async function toggleItem(id) {
+  const it = DATA.shoppingList.find((x) => x.id === id);
+  if (it) it.done = !it.done;
+  renderShopList(); await persist();
+}
+async function deleteItem(id) {
+  DATA.shoppingList = DATA.shoppingList.filter((x) => x.id !== id);
+  renderShopList(); await persist();
+}
+async function clearShopList() {
+  if (!DATA.shoppingList.length) return;
+  if (!confirm("Clear the entire buy list?")) return;
+  DATA.shoppingList = []; renderShopList(); await persist();
+}
+
+// ---------- Excel export ----------
+function exportExcel() {
+  const wb = XLSX.utils.book_new();
+  const summary = [["Month", "Total Budget", "Total Spent", "Saved / Over", "Transactions"]];
+  const monthKeys = Object.keys(DATA.months).sort();
+  monthKeys.forEach((key) => {
+    const m = DATA.months[key];
+    const { totalBudget, totalSpent, remaining } = monthStats(key);
+    summary.push([m.label, totalBudget, totalSpent, remaining, m.transactions.length]);
+
+    // Per-month sheet: budgets block + transactions
+    const rows = [["Category", "Budget", "Spent", "Remaining"]];
+    const stats = monthStats(key);
+    DATA.categories.forEach((c) => {
+      rows.push([c, m.budgets[c] || 0, stats.byCat[c] || 0, (m.budgets[c] || 0) - (stats.byCat[c] || 0)]);
+    });
+    rows.push([]); rows.push(["Date", "Category", "Amount", "Remarks"]);
+    [...m.transactions].sort((a, b) => a.date.localeCompare(b.date))
+      .forEach((t) => rows.push([t.date, t.category, t.amount, t.remarks || ""]));
+    const ws = XLSX.utils.aoa_to_sheet(rows);
+    ws["!cols"] = [{ wch: 24 }, { wch: 22 }, { wch: 12 }, { wch: 20 }];
+    XLSX.utils.book_append_sheet(wb, ws, safeSheetName(m.label));
+  });
+  const sws = XLSX.utils.aoa_to_sheet(summary);
+  sws["!cols"] = [{ wch: 18 }, { wch: 14 }, { wch: 14 }, { wch: 14 }, { wch: 14 }];
+  XLSX.utils.book_append_sheet(wb, sws, "Summary");
+  // move Summary to front
+  wb.SheetNames.unshift(wb.SheetNames.pop());
+  XLSX.writeFile(wb, `AisMan-Expenses-${new Date().toISOString().slice(0,10)}.xlsx`);
+  toast("Excel downloaded");
+}
+function safeSheetName(s) { return s.replace(/[\\/?*\[\]:]/g, "").slice(0, 31); }
+
 // ---------- Persist ----------
 async function persist() {
   setSaveStatus("saving");
@@ -323,4 +395,6 @@ function esc(s) { return String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "
 window.openModal = openModal;
 window.deleteTxn = deleteTxn;
 window.removeCategory = removeCategory;
+window.toggleItem = toggleItem;
+window.deleteItem = deleteItem;
 boot();
