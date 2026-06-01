@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Monthly Expense Dashboard</title>
+  <title>AisMan Monthly Budget & Expenses Dashboard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -11,58 +11,48 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <div class="bg-blobs"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span></div>
+
   <!-- Login gate -->
   <div id="loginScreen" class="login-screen hidden">
-    <div class="login-card">
+    <div class="glass login-card">
       <div class="login-logo">₹</div>
-      <h1>Expense Dashboard</h1>
+      <h1>AisMan Dashboard</h1>
       <p>Enter your password to continue</p>
       <input type="password" id="loginPassword" placeholder="Password" />
-      <button id="loginBtn">Unlock</button>
+      <button id="loginBtn" class="btn-primary">Unlock</button>
       <div id="loginError" class="login-error"></div>
     </div>
   </div>
 
   <!-- App -->
   <div id="app" class="app hidden">
-    <header class="topbar">
+    <header class="glass topbar">
       <div class="brand">
         <span class="brand-mark">₹</span>
         <div>
-          <h1>Monthly Expense Dashboard</h1>
+          <h1>AisMan Monthly Budget &amp; Expenses Dashboard</h1>
           <span class="brand-sub" id="persistenceLabel"></span>
         </div>
       </div>
       <div class="topbar-right">
-        <select id="monthSelect" class="month-select"></select>
+        <select id="monthSelect" class="glass-input"></select>
+        <select id="yearSelect" class="glass-input"></select>
+        <button id="themeToggle" class="icon-toggle" title="Toggle theme">🌙</button>
+        <button id="settingsBtn" class="icon-toggle" title="Settings">⚙︎</button>
         <span id="saveStatus" class="save-status">Saved</span>
       </div>
     </header>
 
     <main class="container">
-      <!-- Summary cards -->
+      <!-- Summary cards = main overview -->
       <section class="cards" id="summaryCards"></section>
 
-      <!-- Charts -->
-      <section class="grid-2">
-        <div class="panel">
-          <div class="panel-head"><h2>Budget vs Spent</h2></div>
-          <div class="chart-wrap"><canvas id="barChart"></canvas></div>
-        </div>
-        <div class="panel">
-          <div class="panel-head"><h2>Spending Split</h2></div>
-          <div class="chart-wrap"><canvas id="donutChart"></canvas></div>
-        </div>
-      </section>
+      <!-- Savings highlight -->
+      <section class="glass savings-strip" id="savingsStrip"></section>
 
-      <!-- Category breakdown -->
-      <section class="panel">
-        <div class="panel-head"><h2>Category Breakdown</h2></div>
-        <div id="categoryBars" class="category-bars"></div>
-      </section>
-
-      <!-- Transactions -->
-      <section class="panel">
+      <!-- Transactions (moved up, right under the overview) -->
+      <section class="glass panel">
         <div class="panel-head transactions-head">
           <h2>Transactions <span id="txnCount" class="muted"></span></h2>
           <button id="addTxnBtn" class="btn-primary">+ Add transaction</button>
@@ -70,32 +60,42 @@
         <div class="table-wrap">
           <table class="txn-table">
             <thead>
-              <tr>
-                <th>Date</th>
-                <th>Category</th>
-                <th class="num">Amount</th>
-                <th>Remarks</th>
-                <th></th>
-              </tr>
+              <tr><th>Date</th><th>Category</th><th class="num">Amount</th><th>Remarks</th><th></th></tr>
             </thead>
             <tbody id="txnBody"></tbody>
           </table>
-          <div id="emptyState" class="empty-state hidden">No transactions yet for this month.</div>
+          <div id="emptyState" class="empty-state hidden">No transactions yet for this month. Add your first one above.</div>
         </div>
+      </section>
+
+      <!-- Charts -->
+      <section class="grid-2">
+        <div class="glass panel">
+          <div class="panel-head"><h2>Budget vs Spent</h2></div>
+          <div class="chart-wrap"><canvas id="barChart"></canvas></div>
+        </div>
+        <div class="glass panel">
+          <div class="panel-head"><h2>Spending Split</h2></div>
+          <div class="chart-wrap"><canvas id="donutChart"></canvas></div>
+        </div>
+      </section>
+
+      <!-- Category breakdown -->
+      <section class="glass panel">
+        <div class="panel-head"><h2>Category Breakdown</h2></div>
+        <div id="categoryBars" class="category-bars"></div>
       </section>
     </main>
   </div>
 
   <!-- Transaction modal -->
   <div id="modal" class="modal hidden">
-    <div class="modal-card">
+    <div class="glass modal-card">
       <h3 id="modalTitle">Add transaction</h3>
-      <label>Date<input type="date" id="fDate" /></label>
-      <label>Category
-        <select id="fCategory"></select>
-      </label>
-      <label>Amount<input type="number" id="fAmount" min="0" step="0.01" placeholder="0" /></label>
-      <label>Remarks<input type="text" id="fRemarks" placeholder="e.g. swiggy, rent" /></label>
+      <label>Date<input type="date" id="fDate" class="glass-input" /></label>
+      <label>Category<select id="fCategory" class="glass-input"></select></label>
+      <label>Amount<input type="number" id="fAmount" min="0" step="0.01" placeholder="0" class="glass-input" /></label>
+      <label>Remarks<input type="text" id="fRemarks" placeholder="e.g. swiggy, rent" class="glass-input" /></label>
       <div class="modal-actions">
         <button id="cancelBtn" class="btn-ghost">Cancel</button>
         <button id="saveTxnBtn" class="btn-primary">Save</button>
@@ -103,8 +103,38 @@
     </div>
   </div>
 
-  <div id="toast" class="toast hidden"></div>
+  <!-- Settings slide-over -->
+  <div id="settingsOverlay" class="settings-overlay hidden">
+    <div class="glass settings-panel">
+      <div class="settings-head">
+        <h3>Settings — Budgets &amp; Categories</h3>
+        <button id="closeSettings" class="icon-toggle">✕</button>
+      </div>
+      <p class="muted" id="settingsMonthLabel"></p>
+      <div id="budgetRows" class="budget-rows"></div>
 
+      <div class="add-cat-row">
+        <input type="text" id="newCatName" class="glass-input" placeholder="New category name" />
+        <input type="number" id="newCatBudget" class="glass-input" placeholder="Budget" min="0" />
+        <button id="addCatBtn" class="btn-ghost">+ Add</button>
+      </div>
+
+      <div class="settings-total">
+        <span>Total monthly budget</span>
+        <b id="settingsTotal">₹0</b>
+      </div>
+
+      <label class="apply-all">
+        <input type="checkbox" id="applyAll" /> Apply these budgets to every month
+      </label>
+
+      <div class="modal-actions">
+        <button id="settingsSaveBtn" class="btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
   <script src="app.js"></script>
 </body>
 </html>
