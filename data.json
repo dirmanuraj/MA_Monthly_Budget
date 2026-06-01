@@ -1,0 +1,850 @@
+{
+  "currency": "₹",
+  "categories": [
+    "Rent & Maintenance",
+    "Groceries & Outside Food",
+    "Bills & Subscriptions",
+    "Leisure & Entertainment",
+    "Miscellaneous"
+  ],
+  "defaultBudgets": {
+    "Rent & Maintenance": 20000,
+    "Groceries & Outside Food": 10000,
+    "Bills & Subscriptions": 4000,
+    "Leisure & Entertainment": 5000,
+    "Miscellaneous": 1000
+  },
+  "months": {
+    "2026-02": {
+      "label": "February 2026",
+      "budgets": {
+        "Rent & Maintenance": 20000,
+        "Groceries & Outside Food": 10000,
+        "Bills & Subscriptions": 4000,
+        "Leisure & Entertainment": 5000,
+        "Miscellaneous": 1000
+      },
+      "transactions": [
+        {
+          "id": "f001",
+          "date": "2026-02-01",
+          "category": "Rent & Maintenance",
+          "amount": 19070,
+          "remarks": "rent"
+        },
+        {
+          "id": "f002",
+          "date": "2026-02-01",
+          "category": "Rent & Maintenance",
+          "amount": 50,
+          "remarks": "waste"
+        },
+        {
+          "id": "f003",
+          "date": "2026-02-01",
+          "category": "Groceries & Outside Food",
+          "amount": 276,
+          "remarks": "swiggy"
+        },
+        {
+          "id": "f004",
+          "date": "2026-02-01",
+          "category": "Leisure & Entertainment",
+          "amount": 375,
+          "remarks": "nchef"
+        },
+        {
+          "id": "f005",
+          "date": "2026-02-05",
+          "category": "Groceries & Outside Food",
+          "amount": 147,
+          "remarks": "swiggy"
+        },
+        {
+          "id": "f006",
+          "date": "2026-02-05",
+          "category": "Groceries & Outside Food",
+          "amount": 289,
+          "remarks": "swiggy"
+        },
+        {
+          "id": "f007",
+          "date": "2026-02-06",
+          "category": "Groceries & Outside Food",
+          "amount": 185,
+          "remarks": "swiggy"
+        },
+        {
+          "id": "f008",
+          "date": "2026-02-07",
+          "category": "Leisure & Entertainment",
+          "amount": 388,
+          "remarks": "movie"
+        },
+        {
+          "id": "f009",
+          "date": "2026-02-07",
+          "category": "Leisure & Entertainment",
+          "amount": 363,
+          "remarks": "food"
+        },
+        {
+          "id": "f010",
+          "date": "2026-02-07",
+          "category": "Leisure & Entertainment",
+          "amount": 405,
+          "remarks": "popcorn"
+        },
+        {
+          "id": "f011",
+          "date": "2026-02-07",
+          "category": "Leisure & Entertainment",
+          "amount": 388,
+          "remarks": "movie"
+        },
+        {
+          "id": "f012",
+          "date": "2026-02-07",
+          "category": "Leisure & Entertainment",
+          "amount": 150,
+          "remarks": "parking"
+        },
+        {
+          "id": "f013",
+          "date": "2026-02-08",
+          "category": "Groceries & Outside Food",
+          "amount": 422,
+          "remarks": "blinkit"
+        },
+        {
+          "id": "f014",
+          "date": "2026-02-08",
+          "category": "Groceries & Outside Food",
+          "amount": 270,
+          "remarks": "blinkit"
+        },
+        {
+          "id": "f015",
+          "date": "2026-02-08",
+          "category": "Groceries & Outside Food",
+          "amount": 364,
+          "remarks": "instamart"
+        },
+        {
+          "id": "f016",
+          "date": "2026-02-09",
+          "category": "Groceries & Outside Food",
+          "amount": 110,
+          "remarks": "food (MN)"
+        },
+        {
+          "id": "f017",
+          "date": "2026-02-10",
+          "category": "Leisure & Entertainment",
+          "amount": 377,
+          "remarks": "nchef"
+        },
+        {
+          "id": "f018",
+          "date": "2026-02-10",
+          "category": "Bills & Subscriptions",
+          "amount": 389,
+          "remarks": "youtube"
+        },
+        {
+          "id": "f019",
+          "date": "2026-02-11",
+          "category": "Groceries & Outside Food",
+          "amount": 340,
+          "remarks": "food (MN)"
+        },
+        {
+          "id": "f020",
+          "date": "2026-02-12",
+          "category": "Bills & Subscriptions",
+          "amount": 749,
+          "remarks": "iCloud storage"
+        },
+        {
+          "id": "f021",
+          "date": "2026-02-12",
+          "category": "Bills & Subscriptions",
+          "amount": 365,
+          "remarks": "Apple One"
+        },
+        {
+          "id": "f022",
+          "date": "2026-02-13",
+          "category": "Bills & Subscriptions",
+          "amount": 750,
+          "remarks": "Google storage"
+        },
+        {
+          "id": "f023",
+          "date": "2026-02-14",
+          "category": "Groceries & Outside Food",
+          "amount": 515,
+          "remarks": "Blinkit"
+        },
+        {
+          "id": "f024",
+          "date": "2026-02-14",
+          "category": "Groceries & Outside Food",
+          "amount": 265,
+          "remarks": "Flipkart"
+        },
+        {
+          "id": "f025",
+          "date": "2026-02-14",
+          "category": "Leisure & Entertainment",
+          "amount": 1000,
+          "remarks": "Haircut"
+        },
+        {
+          "id": "f026",
+          "date": "2026-02-14",
+          "category": "Groceries & Outside Food",
+          "amount": 70,
+          "remarks": "Food"
+        },
+        {
+          "id": "f027",
+          "date": "2026-02-14",
+          "category": "Groceries & Outside Food",
+          "amount": 160,
+          "remarks": "Supermarket"
+        },
+        {
+          "id": "f028",
+          "date": "2026-02-14",
+          "category": "Groceries & Outside Food",
+          "amount": 1246,
+          "remarks": "instamart"
+        },
+        {
+          "id": "f029",
+          "date": "2026-02-14",
+          "category": "Groceries & Outside Food",
+          "amount": 672,
+          "remarks": "instamart"
+        },
+        {
+          "id": "f030",
+          "date": "2026-02-15",
+          "category": "Groceries & Outside Food",
+          "amount": 110,
+          "remarks": "Thalassery"
+        },
+        {
+          "id": "f031",
+          "date": "2026-02-15",
+          "category": "Groceries & Outside Food",
+          "amount": 90,
+          "remarks": "Kabab"
+        },
+        {
+          "id": "f032",
+          "date": "2026-02-16",
+          "category": "Miscellaneous",
+          "amount": 400,
+          "remarks": "printout"
+        },
+        {
+          "id": "f033",
+          "date": "2026-02-16",
+          "category": "Leisure & Entertainment",
+          "amount": 480,
+          "remarks": "Movie"
+        },
+        {
+          "id": "f034",
+          "date": "2026-02-16",
+          "category": "Groceries & Outside Food",
+          "amount": 178,
+          "remarks": "food (MN)"
+        },
+        {
+          "id": "f035",
+          "date": "2026-02-17",
+          "category": "Groceries & Outside Food",
+          "amount": 298,
+          "remarks": "swiggy"
+        },
+        {
+          "id": "f036",
+          "date": "2026-02-17",
+          "category": "Bills & Subscriptions",
+          "amount": 1179,
+          "remarks": "internet"
+        },
+        {
+          "id": "f037",
+          "date": "2026-02-18",
+          "category": "Groceries & Outside Food",
+          "amount": 481,
+          "remarks": "Instamart"
+        },
+        {
+          "id": "f038",
+          "date": "2026-02-18",
+          "category": "Groceries & Outside Food",
+          "amount": 147,
+          "remarks": "Food (MN)"
+        },
+        {
+          "id": "f039",
+          "date": "2026-02-20",
+          "category": "Groceries & Outside Food",
+          "amount": 394,
+          "remarks": "Food (MN)"
+        },
+        {
+          "id": "f040",
+          "date": "2026-02-22",
+          "category": "Groceries & Outside Food",
+          "amount": 761,
+          "remarks": "Flipkart"
+        },
+        {
+          "id": "f041",
+          "date": "2026-02-22",
+          "category": "Groceries & Outside Food",
+          "amount": 327,
+          "remarks": "Flipkart"
+        },
+        {
+          "id": "f042",
+          "date": "2026-02-23",
+          "category": "Groceries & Outside Food",
+          "amount": 185,
+          "remarks": "Food (MN)"
+        },
+        {
+          "id": "f043",
+          "date": "2026-02-27",
+          "category": "Groceries & Outside Food",
+          "amount": 188,
+          "remarks": "Food (MN)"
+        },
+        {
+          "id": "f044",
+          "date": "2026-02-27",
+          "category": "Groceries & Outside Food",
+          "amount": 278,
+          "remarks": "Flipkart"
+        }
+      ]
+    },
+    "2026-03": {
+      "label": "March 2026",
+      "budgets": {
+        "Rent & Maintenance": 20000,
+        "Groceries & Outside Food": 10000,
+        "Bills & Subscriptions": 4000,
+        "Leisure & Entertainment": 5000,
+        "Miscellaneous": 1000
+      },
+      "transactions": [
+        {
+          "id": "m001",
+          "date": "2026-03-01",
+          "category": "Groceries & Outside Food",
+          "amount": 251,
+          "remarks": "Swiggy"
+        },
+        {
+          "id": "m002",
+          "date": "2026-03-01",
+          "category": "Groceries & Outside Food",
+          "amount": 200,
+          "remarks": "Food"
+        },
+        {
+          "id": "m003",
+          "date": "2026-03-02",
+          "category": "Groceries & Outside Food",
+          "amount": 153,
+          "remarks": "Food (MN)"
+        },
+        {
+          "id": "m004",
+          "date": "2026-03-02",
+          "category": "Rent & Maintenance",
+          "amount": 19023,
+          "remarks": "Rent"
+        },
+        {
+          "id": "m005",
+          "date": "2026-03-03",
+          "category": "Groceries & Outside Food",
+          "amount": 300,
+          "remarks": "Food truck"
+        },
+        {
+          "id": "m006",
+          "date": "2026-03-03",
+          "category": "Groceries & Outside Food",
+          "amount": 77.5,
+          "remarks": "veg"
+        },
+        {
+          "id": "m007",
+          "date": "2026-03-03",
+          "category": "Groceries & Outside Food",
+          "amount": 335,
+          "remarks": "vmart"
+        },
+        {
+          "id": "m008",
+          "date": "2026-03-04",
+          "category": "Groceries & Outside Food",
+          "amount": 147,
+          "remarks": "Food (MN)"
+        },
+        {
+          "id": "m009",
+          "date": "2026-03-06",
+          "category": "Groceries & Outside Food",
+          "amount": 517,
+          "remarks": "instamart"
+        },
+        {
+          "id": "m010",
+          "date": "2026-03-06",
+          "category": "Groceries & Outside Food",
+          "amount": 291,
+          "remarks": "swiggy (fd)"
+        },
+        {
+          "id": "m011",
+          "date": "2026-03-08",
+          "category": "Groceries & Outside Food",
+          "amount": 90,
+          "remarks": "dosa batter"
+        },
+        {
+          "id": "m012",
+          "date": "2026-03-09",
+          "category": "Leisure & Entertainment",
+          "amount": 460,
+          "remarks": "n chef"
+        },
+        {
+          "id": "m013",
+          "date": "2026-03-09",
+          "category": "Rent & Maintenance",
+          "amount": 50,
+          "remarks": "waste"
+        },
+        {
+          "id": "m014",
+          "date": "2026-03-09",
+          "category": "Leisure & Entertainment",
+          "amount": 283,
+          "remarks": "movie"
+        },
+        {
+          "id": "m015",
+          "date": "2026-03-09",
+          "category": "Groceries & Outside Food",
+          "amount": 510,
+          "remarks": "instamart"
+        },
+        {
+          "id": "m016",
+          "date": "2026-03-11",
+          "category": "Groceries & Outside Food",
+          "amount": 360,
+          "remarks": "food truck"
+        },
+        {
+          "id": "m017",
+          "date": "2026-03-12",
+          "category": "Leisure & Entertainment",
+          "amount": 303,
+          "remarks": "fd swiggy"
+        },
+        {
+          "id": "m018",
+          "date": "2026-03-13",
+          "category": "Leisure & Entertainment",
+          "amount": 155,
+          "remarks": "tea"
+        },
+        {
+          "id": "m019",
+          "date": "2026-03-14",
+          "category": "Groceries & Outside Food",
+          "amount": 314,
+          "remarks": "blinkit"
+        },
+        {
+          "id": "m020",
+          "date": "2026-03-15",
+          "category": "Groceries & Outside Food",
+          "amount": 340,
+          "remarks": "chicken"
+        },
+        {
+          "id": "m021",
+          "date": "2026-03-15",
+          "category": "Groceries & Outside Food",
+          "amount": 296,
+          "remarks": "instamart"
+        },
+        {
+          "id": "m022",
+          "date": "2026-03-17",
+          "category": "Leisure & Entertainment",
+          "amount": 40,
+          "remarks": "tea"
+        },
+        {
+          "id": "m023",
+          "date": "2026-03-17",
+          "category": "Leisure & Entertainment",
+          "amount": 349,
+          "remarks": "movie"
+        },
+        {
+          "id": "m024",
+          "date": "2026-03-17",
+          "category": "Leisure & Entertainment",
+          "amount": 544,
+          "remarks": "popeyes"
+        },
+        {
+          "id": "m025",
+          "date": "2026-03-17",
+          "category": "Leisure & Entertainment",
+          "amount": 130,
+          "remarks": "parking"
+        },
+        {
+          "id": "m026",
+          "date": "2026-03-18",
+          "category": "Bills & Subscriptions",
+          "amount": 1178,
+          "remarks": "wifi"
+        },
+        {
+          "id": "m027",
+          "date": "2026-03-18",
+          "category": "Groceries & Outside Food",
+          "amount": 480,
+          "remarks": "amazon"
+        },
+        {
+          "id": "m028",
+          "date": "2026-03-18",
+          "category": "Groceries & Outside Food",
+          "amount": 276,
+          "remarks": "flipkart"
+        },
+        {
+          "id": "m029",
+          "date": "2026-03-18",
+          "category": "Groceries & Outside Food",
+          "amount": 395,
+          "remarks": "instamart"
+        },
+        {
+          "id": "m030",
+          "date": "2026-03-19",
+          "category": "Groceries & Outside Food",
+          "amount": 369,
+          "remarks": "amazon"
+        },
+        {
+          "id": "m031",
+          "date": "2026-03-19",
+          "category": "Groceries & Outside Food",
+          "amount": 306,
+          "remarks": "instamart"
+        },
+        {
+          "id": "m032",
+          "date": "2026-03-20",
+          "category": "Leisure & Entertainment",
+          "amount": 480,
+          "remarks": "fd (thala)"
+        },
+        {
+          "id": "m033",
+          "date": "2026-03-21",
+          "category": "Leisure & Entertainment",
+          "amount": 229,
+          "remarks": "fd (thala)"
+        },
+        {
+          "id": "m034",
+          "date": "2026-03-21",
+          "category": "Leisure & Entertainment",
+          "amount": 220,
+          "remarks": "fd truck"
+        },
+        {
+          "id": "m035",
+          "date": "2026-03-21",
+          "category": "Leisure & Entertainment",
+          "amount": 560,
+          "remarks": "movie"
+        },
+        {
+          "id": "m036",
+          "date": "2026-03-22",
+          "category": "Leisure & Entertainment",
+          "amount": 80,
+          "remarks": "juice"
+        },
+        {
+          "id": "m037",
+          "date": "2026-03-22",
+          "category": "Groceries & Outside Food",
+          "amount": 88,
+          "remarks": "veg"
+        },
+        {
+          "id": "m038",
+          "date": "2026-03-22",
+          "category": "Groceries & Outside Food",
+          "amount": 635,
+          "remarks": "groceries"
+        },
+        {
+          "id": "m039",
+          "date": "2026-03-22",
+          "category": "Groceries & Outside Food",
+          "amount": 60,
+          "remarks": "parking"
+        },
+        {
+          "id": "m040",
+          "date": "2026-03-22",
+          "category": "Groceries & Outside Food",
+          "amount": 215,
+          "remarks": "thalassery (Fd)"
+        },
+        {
+          "id": "m041",
+          "date": "2026-03-25",
+          "category": "Groceries & Outside Food",
+          "amount": 195,
+          "remarks": "thalassery (Fd)"
+        },
+        {
+          "id": "m042",
+          "date": "2026-03-25",
+          "category": "Groceries & Outside Food",
+          "amount": 30,
+          "remarks": "parking"
+        },
+        {
+          "id": "m043",
+          "date": "2026-03-25",
+          "category": "Miscellaneous",
+          "amount": 1591,
+          "remarks": "manas hospital"
+        },
+        {
+          "id": "m044",
+          "date": "2026-03-26",
+          "category": "Groceries & Outside Food",
+          "amount": 268,
+          "remarks": "sm mart"
+        },
+        {
+          "id": "m045",
+          "date": "2026-03-26",
+          "category": "Groceries & Outside Food",
+          "amount": 270,
+          "remarks": "fd truck + chai"
+        },
+        {
+          "id": "m046",
+          "date": "2026-03-27",
+          "category": "Leisure & Entertainment",
+          "amount": 489,
+          "remarks": "movie"
+        },
+        {
+          "id": "m047",
+          "date": "2026-03-27",
+          "category": "Leisure & Entertainment",
+          "amount": 405,
+          "remarks": "popcorn"
+        },
+        {
+          "id": "m048",
+          "date": "2026-03-27",
+          "category": "Groceries & Outside Food",
+          "amount": 50,
+          "remarks": "parking"
+        },
+        {
+          "id": "m049",
+          "date": "2026-03-27",
+          "category": "Groceries & Outside Food",
+          "amount": 220,
+          "remarks": "food"
+        },
+        {
+          "id": "m050",
+          "date": "2026-03-28",
+          "category": "Leisure & Entertainment",
+          "amount": 283,
+          "remarks": "food"
+        },
+        {
+          "id": "m051",
+          "date": "2026-03-29",
+          "category": "Groceries & Outside Food",
+          "amount": 319,
+          "remarks": "swiggy"
+        },
+        {
+          "id": "m052",
+          "date": "2026-03-31",
+          "category": "Groceries & Outside Food",
+          "amount": 220,
+          "remarks": "fd truck"
+        }
+      ]
+    },
+    "2026-04": {
+      "label": "April 2026",
+      "budgets": {
+        "Rent & Maintenance": 20000,
+        "Groceries & Outside Food": 10000,
+        "Bills & Subscriptions": 4000,
+        "Leisure & Entertainment": 5000,
+        "Miscellaneous": 1000
+      },
+      "transactions": [
+        {
+          "id": "a001",
+          "date": "2026-04-02",
+          "category": "Groceries & Outside Food",
+          "amount": 180,
+          "remarks": "fd (MN)"
+        },
+        {
+          "id": "a002",
+          "date": "2026-04-02",
+          "category": "Groceries & Outside Food",
+          "amount": 510,
+          "remarks": "instamart (cash)"
+        },
+        {
+          "id": "a003",
+          "date": "2026-04-02",
+          "category": "Groceries & Outside Food",
+          "amount": 430,
+          "remarks": "chicken"
+        },
+        {
+          "id": "a004",
+          "date": "2026-04-02",
+          "category": "Leisure & Entertainment",
+          "amount": 40,
+          "remarks": "chai (thala)"
+        },
+        {
+          "id": "a005",
+          "date": "2026-04-02",
+          "category": "Leisure & Entertainment",
+          "amount": 480,
+          "remarks": "movie"
+        },
+        {
+          "id": "a006",
+          "date": "2026-04-02",
+          "category": "Miscellaneous",
+          "amount": 1899,
+          "remarks": "amazon"
+        },
+        {
+          "id": "a007",
+          "date": "2026-04-09",
+          "category": "Groceries & Outside Food",
+          "amount": 473,
+          "remarks": "nchef"
+        },
+        {
+          "id": "a008",
+          "date": "2026-04-15",
+          "category": "Groceries & Outside Food",
+          "amount": 396,
+          "remarks": "thala (fd)"
+        },
+        {
+          "id": "a009",
+          "date": "2026-04-17",
+          "category": "Leisure & Entertainment",
+          "amount": 40,
+          "remarks": "parking"
+        },
+        {
+          "id": "a010",
+          "date": "2026-04-17",
+          "category": "Leisure & Entertainment",
+          "amount": 400,
+          "remarks": "fd (AMB)"
+        },
+        {
+          "id": "a011",
+          "date": "2026-04-17",
+          "category": "Leisure & Entertainment",
+          "amount": 363,
+          "remarks": "movie"
+        },
+        {
+          "id": "a012",
+          "date": "2026-04-17",
+          "category": "Leisure & Entertainment",
+          "amount": 851,
+          "remarks": "movie"
+        },
+        {
+          "id": "a013",
+          "date": "2026-04-19",
+          "category": "Leisure & Entertainment",
+          "amount": 296,
+          "remarks": "movie"
+        },
+        {
+          "id": "a014",
+          "date": "2026-04-19",
+          "category": "Leisure & Entertainment",
+          "amount": 40,
+          "remarks": "parking"
+        },
+        {
+          "id": "a015",
+          "date": "2026-04-22",
+          "category": "Groceries & Outside Food",
+          "amount": 220,
+          "remarks": "fd truck"
+        },
+        {
+          "id": "a016",
+          "date": "2026-04-22",
+          "category": "Groceries & Outside Food",
+          "amount": 50,
+          "remarks": "tea"
+        }
+      ]
+    },
+    "2026-06": {
+      "label": "June 2026",
+      "budgets": {
+        "Rent & Maintenance": 20000,
+        "Groceries & Outside Food": 10000,
+        "Bills & Subscriptions": 4000,
+        "Leisure & Entertainment": 5000,
+        "Miscellaneous": 1000
+      },
+      "transactions": []
+    }
+  }
+}
