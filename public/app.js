@@ -4,6 +4,8 @@ let barChart, yearChart;
 let filterText = "", filterCat = "all";
 const PALETTE = ["#6366f1", "#22d3ee", "#f59e0b", "#ec4899", "#10b981", "#a855f7", "#ef4444", "#14b8a6", "#f97316", "#3b82f6"];
 const MONTH_NAMES = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+const ICON_MOON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+const ICON_SUN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
 
 // ---------- Helpers ----------
 const $ = (id) => document.getElementById(id);
@@ -41,7 +43,7 @@ function initTheme() {
 function setTheme(theme) {
   document.documentElement.dataset.theme = theme;
   localStorage.setItem("aisman-theme", theme);
-  $("themeToggle").textContent = theme === "dark" ? "🌙" : "☀️";
+  $("themeToggle").innerHTML = theme === "dark" ? ICON_MOON : ICON_SUN;
   if (DATA) render();
 }
 
@@ -52,7 +54,8 @@ async function boot() {
     try { navigator.serviceWorker.register("/sw.js"); } catch (e) {}
   }
   const cfg = await (await fetch("/api/config")).json();
-  $("persistenceLabel").textContent = cfg.persistence === "github" ? "Synced to GitHub" : "Local storage — configure GitHub to persist";
+  const _t = new Date();
+  const _bd = $("brandDate"); if (_bd) _bd.textContent = _t.toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
   if (cfg.requiresPassword) {
     $("loginScreen").classList.remove("hidden");
     $("loginBtn").onclick = doLogin;
@@ -122,6 +125,9 @@ function wireUI() {
   $("addRecBtn").onclick = addRecurring;
   $("addStapleBtn").onclick = addStaple;
   $("setPinBtn").onclick = setPin;
+  $("pinModalCancel").onclick = () => $("pinModal").classList.add("hidden");
+  $("pinModalSave").onclick = savePinFromModal;
+  $("pinConfirm").addEventListener("keydown", (e) => { if (e.key === "Enter") savePinFromModal(); });
   $("removePinBtn").onclick = removePin;
   $("backupBtn").onclick = () => download(`AisMan-backup-${new Date().toISOString().slice(0,10)}.json`, JSON.stringify(DATA, null, 2));
   $("restoreBtn").onclick = () => $("restoreInput").click();
@@ -560,12 +566,17 @@ async function removeStaple(i) { DATA.staples.splice(i, 1); renderStapleManage()
 
 // PIN
 function setPin() {
-  const p = prompt("Set a PIN (digits). Leave blank to cancel:");
-  if (!p) return;
-  const c = prompt("Confirm PIN:");
+  $("pinNew").value = ""; $("pinConfirm").value = "";
+  $("pinModal").classList.remove("hidden");
+  setTimeout(() => $("pinNew").focus(), 50);
+}
+function savePinFromModal() {
+  const p = $("pinNew").value.trim(), c = $("pinConfirm").value.trim();
+  if (!p) { toast("Enter a PIN", true); return; }
   if (p !== c) { toast("PINs didn't match", true); return; }
   localStorage.setItem("aisman-pin", hashPin(p));
   $("pinStatus").textContent = "PIN is ON for this device.";
+  $("pinModal").classList.add("hidden");
   toast("PIN set for this device");
 }
 function removePin() { localStorage.removeItem("aisman-pin"); $("pinStatus").textContent = "No PIN set on this device."; toast("PIN removed"); }

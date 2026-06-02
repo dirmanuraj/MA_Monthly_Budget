@@ -48,21 +48,27 @@
 
   <!-- App -->
   <div id="app" class="app hidden">
-    <header class="glass topbar">
-      <div class="brand">
-        <span class="brand-mark"><svg class="ma-mark" viewBox="0 0 100 100"><defs><linearGradient id="gBrand" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#6366f1"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs><g fill="none" stroke="url(#gBrand)" stroke-width="9" stroke-linejoin="round" stroke-linecap="round"><path d="M12,80 L12,24 L50,64 L88,24 L88,80"/><path d="M30,80 L50,38 L70,80" stroke-width="8"/></g></svg></span>
-        <div>
-          <h1><span class="t-ais">Ais</span><span class="t-man">Man</span> <span class="t-rest">Expense Tracker</span></h1>
-          <span class="brand-sub" id="persistenceLabel"></span>
+            <header class="glass topbar topbar-d">
+      <div class="brand-tile"><span class="brand-mark"><svg class="ma-mark" viewBox="0 0 100 100"><defs><linearGradient id="gBrand" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#6366f1"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs><g fill="none" stroke="url(#gBrand)" stroke-width="9" stroke-linejoin="round" stroke-linecap="round"><path d="M12,80 L12,24 L50,64 L88,24 L88,80"/><path d="M30,80 L50,38 L70,80" stroke-width="8"/></g></svg></span></div>
+      <div class="topbar-body">
+        <div class="brand-text">
+          <h1><span class="t-ais">Ais</span><span class="t-man">Man</span></h1>
+          <span class="brand-tag" id="brandDate"></span>
         </div>
-      </div>
-      <div class="topbar-right">
-        <select id="monthSelect" class="glass-input"></select>
-        <select id="yearSelect" class="glass-input"></select>
-        <button id="exportBtn" class="icon-toggle" title="Download PDF report">⤓</button>
-        <button id="themeToggle" class="icon-toggle" title="Toggle theme">🌙</button>
-        <button id="settingsBtn" class="icon-toggle" title="Settings">⚙︎</button>
-        <span id="saveStatus" class="save-status">Saved</span>
+        <div class="topbar-right">
+          <div class="date-picker">
+            <svg class="dp-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
+            <select id="monthSelect" class="date-select" aria-label="Month"></select>
+            <span class="dp-div"></span>
+            <select id="yearSelect" class="date-select" aria-label="Year"></select>
+          </div>
+          <div class="tool-group">
+            <button id="exportBtn" class="tool-btn" title="Download PDF report" aria-label="Download PDF report"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M8 11l4 4 4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg></button>
+            <button id="themeToggle" class="tool-btn" title="Toggle theme" aria-label="Toggle theme"></button>
+            <button id="settingsBtn" class="tool-btn" title="Settings" aria-label="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
+          </div>
+          <span id="saveStatus" class="save-status">Saved</span>
+        </div>
       </div>
     </header>
 
@@ -213,6 +219,19 @@
         <button id="backupBtn" class="btn-ghost btn-sm">⤓ Download backup</button>
         <button id="restoreBtn" class="btn-ghost btn-sm">⤒ Restore backup</button>
         <input type="file" id="restoreInput" accept=".json,application/json" class="hidden" />
+      </div>
+    </div>
+  </div>
+
+  <!-- PIN set modal -->
+  <div id="pinModal" class="modal hidden">
+    <div class="glass modal-card">
+      <h3>Set a PIN</h3>
+      <label>New PIN<input type="password" inputmode="numeric" id="pinNew" class="glass-input" placeholder="Enter digits" maxlength="8" autocomplete="off" /></label>
+      <label>Confirm PIN<input type="password" inputmode="numeric" id="pinConfirm" class="glass-input" placeholder="Re-enter" maxlength="8" autocomplete="off" /></label>
+      <div class="modal-actions">
+        <button id="pinModalCancel" class="btn-ghost">Cancel</button>
+        <button id="pinModalSave" class="btn-primary">Set PIN</button>
       </div>
     </div>
   </div>
